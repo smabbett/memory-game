@@ -64,14 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
 			name: 'momson',
 			img: 'images/momson.jpg',
 		},
-		{
-			name: 'paris',
-			img: 'images/paris.jpg',
-		},
-		{
-			name: 'paris',
-			img: 'images/paris.jpg',
-		},
+		// {
+		// 	name: 'paris',
+		// 	img: 'images/paris.jpg',
+		// },
+		// {
+		// 	name: 'paris',
+		// 	img: 'images/paris.jpg',
+		// },
 	];
 
 	cardArray.sort(() => 0.5 - Math.random());
@@ -89,6 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			var card = document.createElement('img');
 			card.setAttribute('src', 'images/flowers.jpg');
 			card.setAttribute('data-id', i);
+			card.setAttribute('width', '400');
+			card.setAttribute('height', '400');
 			card.addEventListener('click', flipCard);
 			grid.appendChild(card);
 		}
@@ -118,9 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function flipCard() {
 		var cardId = this.getAttribute('data-id');
-		cardsChosen.push(cardArray[cardId].name);
-		cardsChosenId.push(cardId);
-		this.setAttribute('src', cardArray[cardId].img);
+		if (!cardsChosenId.includes(cardId)) {
+			cardsChosen.push(cardArray[cardId].name);
+			cardsChosenId.push(cardId);
+			this.setAttribute('src', cardArray[cardId].img);
+		}
 		if (cardsChosen.length === 2) {
 			setTimeout(checkForMatch, 500);
 		}
